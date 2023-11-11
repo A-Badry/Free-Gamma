@@ -1,0 +1,88 @@
+﻿<Window x:Class="Free_Gamma.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Free_Gamma"
+        mc:Ignorable="d"
+        Title="Free Gamma" FontSize="14" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display">
+
+
+    <StackPanel x:Name="pnl_1" Background="WhiteSmoke" >
+
+        <StackPanel Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DockPanel LastChildFill="False">
+                <Button x:Name="btn_CalibrationImage" Width="{Binding ElementName=btn_Profiles, Path=ActualHeight}" Margin="0,0,5,0">
+                    <StackPanel Width="15">
+                        <Grid Height="5" Background="Red" />
+                        <Grid Height="5" Background="Lime" />
+                        <Grid Height="5" Background="Blue" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btn_Profiles" Content="..." Width="{Binding ElementName=btn_Profiles, Path=ActualHeight}" Margin="0,0,5,0"/>
+                <ComboBox x:Name="cmbo_Profile" Width="224" VerticalContentAlignment="Center" HorizontalAlignment="Left" FocusVisualStyle="{x:Null}" Padding="6,0,5,0"/>
+                <StackPanel x:Name="pnl_Save" Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Right">
+                    <Label x:Name="lbl_Save" Content="Save" Foreground="#FF002EFF" Padding="3,5,3,4" VerticalContentAlignment="Bottom" Cursor="Hand"/>
+                    <Rectangle Width="4"/>
+                    <Label x:Name="lbl_CancelSave" Content="Cancel" Foreground="#FF002EFF" Padding="3,5,3,4" VerticalContentAlignment="Bottom" Cursor="Hand"/>
+                    <Rectangle Width="4"/>
+                    <Label x:Name="lbl_SaveAs" Content="Save As" Foreground="#FF002EFF" Padding="3,5,3,4" VerticalContentAlignment="Bottom" Cursor="Hand"/>
+                </StackPanel>
+            </DockPanel>
+
+            <Rectangle Height="13"/>
+
+            <Border BorderThickness="1" BorderBrush="#FFBFBFBF">
+                <StackPanel Orientation="Horizontal" Margin="10">
+
+                    <StackPanel >
+                        <DockPanel LastChildFill="True">
+                            <ComboBox x:Name="cmbo_Mode" Width="180" Height="23" VerticalContentAlignment="Center" HorizontalAlignment="Left" FocusVisualStyle="{x:Null}" Padding="6,0,5,0"/>
+                            <Rectangle Width="6" HorizontalAlignment="Left"/>
+                            <ComboBox x:Name="cmbo_Channel" Height="23" VerticalContentAlignment="Center" FocusVisualStyle="{x:Null}" Padding="6,0,5,0"/>
+                        </DockPanel>
+
+                        <Rectangle Height="10"/>
+                        <local:ctrl_RampGraph x:Name="Graph"/>
+                    </StackPanel>
+
+
+                    <Rectangle Width="1" Fill="#FFD1D1D1" Margin="15,0"/>
+
+
+                    <StackPanel x:Name="pnl_Sliders"  Orientation="Horizontal">
+                        <StackPanel Background="#FFFFC3C3" VerticalAlignment="Center" >
+                            <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider_master_brightness_red" Orientation="Vertical" Margin="0,10,0,0" Value="100" Minimum="10" Maximum="100" Height="240" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="txt_red_value" BorderThickness="0" Background="Transparent"  Width="32" Margin="0,8,0,2" Text="100%" HorizontalContentAlignment="Center" Foreground="#FF565656" Focusable="False" FontSize="12"/>
+                        </StackPanel>
+
+                        <Rectangle Width="10"/>
+                        <StackPanel Background="#FFC3FFC5" VerticalAlignment="Center" >
+                            <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider_master_brightness_green" Orientation="Vertical" Margin="0,10,0,0" Value="100" Minimum="10" Maximum="100" Height="240" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="txt_green_value" BorderThickness="0" Background="Transparent"  Width="32" Margin="0,8,0,2" HorizontalContentAlignment="Center" Text="100%" Foreground="#FF565656" Focusable="False" FontSize="12"/>
+                        </StackPanel>
+
+                        <Rectangle Width="10"/>
+                        <StackPanel Background="#FFC3C5FF" VerticalAlignment="Center" >
+                            <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider_master_brightness_blue" Orientation="Vertical" Margin="0,10,0,0" Value="100" Minimum="10" Maximum="100" Height="240" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="txt_blue_value" BorderThickness="0" Background="Transparent"  Width="32" Margin="0,8,0,2" HorizontalContentAlignment="Center" Text="100%" Foreground="#FF565656" Focusable="False" FontSize="12"/>
+                        </StackPanel>
+
+                        <Rectangle Width="15"/>
+                        <StackPanel VerticalAlignment="Center">
+                            <Slider Style="{DynamicResource SliderStyle1}" x:Name="slider_master_brightness" Orientation="Vertical" Margin="0,10,0,0" Value="90" Minimum="10" Maximum="100" Height="240" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="txt_brightness_value" BorderThickness="0" Background="Transparent"  Width="32" Margin="0,8,0,2" Text="100%" HorizontalContentAlignment="Center" Foreground="#FF565656" Focusable="False" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+
+
+
+    </StackPanel>
+
+
+</Window>

@@ -1,0 +1,14 @@
+﻿<Window x:Class="Free_Gamma.form_BlackLevel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Free_Gamma"
+        mc:Ignorable="d"
+        Title="Black Level Test" MinHeight="450" MinWidth="800" Background="Black" TextOptions.TextFormattingMode="Ideal">
+     <StackPanel x:Name="pnl_1" Margin="10">
+          <TextBlock Text="Set your screen hardware brightness to maximum" Foreground="#FFA6A6A6" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" />
+          <TextBlock Text="The darker you see the black area on this window, the better your screen is." Foreground="#FFA6A6A6" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" />
+        <TextBlock Text="This is basiclly for comparision between different monitors" Foreground="#FFA6A6A6" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" />
+     </StackPanel>
+</Window>
