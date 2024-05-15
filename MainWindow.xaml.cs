@@ -83,7 +83,9 @@ namespace Free_Gamma
             mnu_Profiles_Duplicate = new MenuItem() { Header = "Duplicate" };
             mnu_Profiles_NewProfile = new MenuItem() { Header = "New Profile" };
             mnu_Profiles_Delete = new MenuItem() { Header = "Delete" };
+            mnu_Profiles_Settings = new MenuItem() { Header = "Settings" };
             mnu_Profiles_About = new MenuItem() { Header = "About" };
+           
             mnu_Graph_CopyFromGray = new MenuItem() { Header = "Copy from mixed-mode" };
             mnu_Graph_CopyFrom = new MenuItem() { Header = "Copy from .." };
             mnu_Graph_CopyFromRed = new MenuItem() { Header = "Red" };
@@ -119,6 +121,7 @@ namespace Free_Gamma
             mnu_Profiles_NewProfile.Click += mnu_Profiles_NewProfile_Click;
             mnu_Profiles_Duplicate.Click += mnu_Profiles_Duplicate_Click;
             mnu_Profiles_Delete.Click += mnu_Profiles_Delete_Click;
+            mnu_Profiles_Settings.Click += mnu_Profiles_Settings_Click;
             mnu_Tests_CalibImage.Click += mnu_Tests_CalibImage_Click;
             mnu_Tests_BlackLevel.Click += mnu_Tests_BlackLevel_Click;
             mnu_Tests_DefaultRamp.Click += mnu_Tests_DefaultRamp_Click;
@@ -134,6 +137,7 @@ namespace Free_Gamma
             if (r > 1) pnl_1.LayoutTransform = new ScaleTransform(r, r);
         }
 
+      
 
 
 
@@ -657,6 +661,7 @@ namespace Free_Gamma
         private MenuItem mnu_Profiles_Duplicate;
         private MenuItem mnu_Profiles_NewProfile;
         private MenuItem mnu_Profiles_Delete;
+        private MenuItem mnu_Profiles_Settings;
         private MenuItem mnu_Profiles_About;
 
         private ContextMenu mnu_Graph = new ContextMenu();
@@ -684,6 +689,7 @@ namespace Free_Gamma
             mnu_Profiles.Items.Add(new Separator());
             mnu_Profiles.Items.Add(mnu_Profiles_Delete);
             mnu_Profiles.Items.Add(new Separator());
+            mnu_Profiles.Items.Add(mnu_Profiles_Settings);
             mnu_Profiles.Items.Add(new Separator());
             mnu_Profiles.Items.Add(mnu_Profiles_About);
 
@@ -1079,6 +1085,18 @@ namespace Free_Gamma
         {
             return Settings.Profiles.Where(p => (p.Name ?? "") == (Settings.SelectedProfile ?? "")).ElementAtOrDefault(0);
         }
+
+
+
+
+
+        private void mnu_Profiles_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            var f = new form_Settings();
+            f.ShowDialog();
+            f.Close();
+        }
+
 
 
 
