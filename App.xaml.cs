@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -12,6 +13,8 @@ namespace Free_Gamma
 {
     public partial class App : Application
     {
+
+        static Mutex mutex = new Mutex(true, "{C58C5013-A8A5-484C-A565-ED5ABA17270C}");
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -45,19 +48,26 @@ namespace Free_Gamma
             fastJSON.JSON.Parameters.UseEscapedUnicode = false;
 
             if (Debugger.IsAttached == false) {
-                var current_proc_name = Process.GetCurrentProcess().ProcessName;
-                var current_proc_hwnd = Process.GetCurrentProcess().MainWindowHandle;
-                var processes = Process.GetProcesses();
-                for (int i = 0; i < processes.Count(); i++) {
-                    if (processes[i].ProcessName == current_proc_name) {
-                        if (processes[i].MainWindowHandle != current_proc_hwnd) {
-                            ShowWindow(processes[i].MainWindowHandle, SW_SHOW);
-                            SetForegroundWindow(processes[i].MainWindowHandle);
-                            Application.Current.Shutdown();
+                if (mutex.WaitOne(TimeSpan.Zero, true))
+                    mutex.ReleaseMutex();
+                else
+                {
+                    var cp = Process.GetCurrentProcess();
+                    var p = Process.GetProcessesByName(cp.ProcessName);
+                    for (int i = 0; i < p.Length; i++)
+                    {
+                        if (p[i] != cp & p[i].MainModule.FileName == cp.MainModule.FileName)
+                        {
+                            ShowWindow(p[i].MainWindowHandle, SW_SHOW);
+                            SetForegroundWindow(p[i].MainWindowHandle);
+                            break;
                         }
                     }
+                    Environment.Exit(0);
                 }
+
             }
+
         }
 
 

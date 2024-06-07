@@ -36,11 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>VS2013_Application.ico</ApplicationIcon>
+    <ApplicationIcon>FreeGamma.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="fastJSON">
       <HintPath>References\fastJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="Hardcodet.NotifyIcon.Wpf">
+      <HintPath>References\Hardcodet.NotifyIcon.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -101,12 +104,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ctrl_TitleBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="mod_API.cs" />
+    <Compile Include="ctrl_TitleBar.xaml.cs">
+      <DependentUpon>ctrl_TitleBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -133,10 +143,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="VS2013_Application.ico" />
+    <Resource Include="Resources\calib_img.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\calib_img.png" />
+    <Resource Include="Resources\close.png" />
+    <Resource Include="Resources\max.png" />
+    <Resource Include="Resources\minimize.png" />
+    <Resource Include="Resources\tray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FreeGamma.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

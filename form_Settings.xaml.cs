@@ -24,15 +24,15 @@ namespace Free_Gamma
             btn_Close.Click += btn_Close_Click;
         }
 
-       
+
 
         private void form_Settings_Loaded(object sender, RoutedEventArgs e)
         {
             var k = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
             var n = k.GetValueNames(); k.Close();
             skip_chk_StartWithWindows = true;
-            if (n.ToList().Contains("FreeGamma"))  chk_StartWithWindows.IsChecked = true; 
-            else chk_StartWithWindows.IsChecked = false ;
+            if (n.ToList().Contains("FreeGamma")) chk_StartWithWindows.IsChecked = true;
+            else chk_StartWithWindows.IsChecked = false;
             skip_chk_StartWithWindows = false;
 
         }
@@ -58,11 +58,11 @@ namespace Free_Gamma
         private void chk_StartWithWindows_Unchecked(object sender, RoutedEventArgs e)
         {
             if (skip_chk_StartWithWindows) return;
-            if (mod_General .IsAdministrator ()==false)
+            if (mod_General.IsAdministrator() == false)
             {
                 MessageBox.Show("You need to start the app as administrator to change this setting.", "Notice", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 skip_chk_StartWithWindows = true;
-                chk_StartWithWindows .IsChecked = true;
+                chk_StartWithWindows.IsChecked = true;
                 skip_chk_StartWithWindows = false;
                 return;
             }
@@ -90,7 +90,7 @@ namespace Free_Gamma
             {
                 MessageBox.Show("You need to start the app as administrator to change this setting.", "Notice", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 skip_chk_StartWithWindows = true;
-                chk_StartWithWindows.IsChecked = false ;
+                chk_StartWithWindows.IsChecked = false;
                 skip_chk_StartWithWindows = false;
                 return;
             }
@@ -102,8 +102,8 @@ namespace Free_Gamma
             if (n.ToList().Contains("FreeGamma")) SwW_Found = true;
             else SwW_Found = false;
 
-            var p = (char)34 + Process.GetCurrentProcess().MainModule.FileName + (char)34;
-            if (SwW_Found==false ) k.SetValue("FreeGamma", p, RegistryValueKind.String); 
+            var p = (char)34 + Process.GetCurrentProcess().MainModule.FileName + (char)34 + " /h";
+            if (SwW_Found == false) k.SetValue("FreeGamma", p, RegistryValueKind.String);
             k.Close();
         }
 
@@ -113,7 +113,7 @@ namespace Free_Gamma
 
 
         private void form_Settings_Closed(object sender, System.EventArgs e)
-        { 
+        {
 
 
 

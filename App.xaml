@@ -6,8 +6,16 @@
     <Application.Resources>
 
         <BitmapImage x:Key="CalibImg" UriSource="Resources/calib_img.png"/>
-     
-        
+
+        <Border x:Key="TrayToolTip" Background="GhostWhite" CornerRadius="4">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="5"/>
+            </Border.Effect>
+            <StackPanel Margin="10">
+                <TextBlock Text="Free Gamma"/>
+                <TextBlock Text="Double click to restore"/>
+            </StackPanel>
+        </Border>
         
         <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
