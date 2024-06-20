@@ -41,26 +41,24 @@ namespace Free_Gamma
                 }
             }
 
-
         }
 
 
 
 
 
-        public static bool ShowWindowOnce<WindowType>() where WindowType : new()
+        public static bool ShowWindowOnce<WindowType>() where WindowType : Window, new()
         {
-            for (int i = 0; i < Application.Current.Windows.Count; i++) {
-                if ((Application.Current.Windows[i].GetType().Name ?? "") == (typeof(WindowType).Name ?? "")) {
-                    if (Application.Current.Windows[i].WindowState == WindowState.Minimized) {
-                        Application.Current.Windows[i].WindowState = WindowState.Normal;
-                    }
-                    Application.Current.Windows[i].Activate();
+            var ws = Application.Current.Windows;
+            for (int i = 0; i < ws.Count; i++) {
+                if (ws[i].GetType().Name == typeof(WindowType).Name) {
+                    if (ws[i].WindowState == WindowState.Minimized) ws[i].WindowState = WindowState.Normal;
+                    ws[i].Activate();
                     return false;
                 }
             }
             var w = new WindowType();
-            ((Window) (object) w).Show();
+            w.Show();
             return true;
         }
 
@@ -80,7 +78,7 @@ namespace Free_Gamma
         }
         public static object ExitFrame(object f)
         {
-            ((System.Windows.Threading.DispatcherFrame) f).Continue = false;
+            ((System.Windows.Threading.DispatcherFrame)f).Continue = false;
             return null;
         }
         // ================================

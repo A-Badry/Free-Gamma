@@ -8,22 +8,36 @@
              mc:Ignorable="d" 
              d:DesignWidth="800" VerticalAlignment="Top">
 
+    <StackPanel.Resources >
+        <Border x:Key="TrayToolTip1" Background="GhostWhite" CornerRadius="4" Margin="5">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="4"/>
+            </Border.Effect>
+            <StackPanel Margin="10 5">
+                <TextBlock Text="Minimize to system tray" Foreground="Black"/>
+            </StackPanel>
+        </Border>
+    </StackPanel.Resources>
+
     <DockPanel LastChildFill="False" x:Name="pnl_1">
         <Grid x:Name="pnl_Close" Width="36" Height="30" DockPanel.Dock="Right" MouseEnter="pnl_Close_MouseEnter" MouseLeave="pnl_Command_MouseLeave" MouseLeftButtonUp="pnl_Close_MouseLeftButtonUp" shell:WindowChrome.IsHitTestVisibleInChrome="True">
             <Image Source="Resources/close.png" Margin="7" RenderOptions.BitmapScalingMode="Fant"/>
         </Grid>
         <Grid x:Name="pnl_Max" Width="36" Height="30" DockPanel.Dock="Right" MouseEnter="pnl_Command_MouseEnter" MouseLeave="pnl_Command_MouseLeave" MouseLeftButtonUp="pnl_Max_MouseLeftButtonUp" shell:WindowChrome.IsHitTestVisibleInChrome="True">
-            <Image Source="Resources/max.png" Margin="7" RenderOptions.BitmapScalingMode="Fant"/>
+            <Image Source="Resources/maximize.png" Margin="7" RenderOptions.BitmapScalingMode="Fant"/>
         </Grid>
         <Grid x:Name="pnl_Min" Width="36" Height="30" DockPanel.Dock="Right" MouseEnter="pnl_Command_MouseEnter" MouseLeave="pnl_Command_MouseLeave" MouseLeftButtonUp="pnl_Min_MouseLeftButtonUp" shell:WindowChrome.IsHitTestVisibleInChrome="True">
             <Image Source="Resources/minimize.png" Margin="7" RenderOptions.BitmapScalingMode="Fant"/>
         </Grid>
-        <Grid x:Name="pnl_Tray" Width="36" Height="30" DockPanel.Dock="Right" MouseEnter="pnl_Command_MouseEnter" MouseLeave="pnl_Command_MouseLeave" MouseLeftButtonUp="pnl_Tray_MouseLeftButtonUp" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+        <Grid x:Name="pnl_Tray" Width="36" Height="30" DockPanel.Dock="Right" MouseEnter="pnl_Command_MouseEnter" MouseLeave="pnl_Command_MouseLeave" MouseLeftButtonUp="pnl_Tray_MouseLeftButtonUp" shell:WindowChrome.IsHitTestVisibleInChrome="True" >
+            <Grid.ToolTip >
+                <ToolTip Content="{StaticResource TrayToolTip1}" Background="Transparent" BorderThickness="0" ToolTipService.InitialShowDelay="10"/>
+            </Grid.ToolTip>
             <Image Source="Resources/tray.png" Margin="7" RenderOptions.BitmapScalingMode="Fant"/>
         </Grid>
 
         <Image x:Name="img_Icon"  Width="16" Height="16" Margin="10 1 5 0" RenderOptions.BitmapScalingMode="Fant"/>
         <TextBlock x:Name="txt_AppTitle" Text="App Title" DockPanel.Dock="Left" Margin="5 1 5 0" VerticalAlignment="Center" FontSize="13" />
     </DockPanel>
-    
+
 </StackPanel>

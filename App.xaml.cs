@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
+using System.Data.Common;
 using System.Diagnostics;
-using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -13,8 +12,6 @@ namespace Free_Gamma
 {
     public partial class App : Application
     {
-
-        static Mutex mutex = new Mutex(true, "{C58C5013-A8A5-484C-A565-ED5ABA17270C}");
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -24,6 +21,26 @@ namespace Free_Gamma
 
         private const int SW_MAXIMIZE = 3;
         private const int SW_SHOW = 5;
+        private const int SW_RESTORE = 9;
+
+
+        // Prodcast a message to all process's window handles :
+        delegate bool EnumThreadDelegate(IntPtr hWnd, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        static extern bool EnumThreadWindows(int dwThreadId, EnumThreadDelegate lpfn, IntPtr lParam);
+
+        static IEnumerable<IntPtr> EnumerateProcessWindowHandles(int processId)
+        {
+            var handles = new List<IntPtr>();
+
+            foreach (ProcessThread thread in Process.GetProcessById(processId).Threads)
+                EnumThreadWindows(thread.Id,
+                    (hWnd, lParam) => { handles.Add(hWnd); return true; }, IntPtr.Zero);
+
+            return handles;
+        }
+        // End Prodcast a message to all process's window handles
 
 
 
@@ -47,26 +64,31 @@ namespace Free_Gamma
             fastJSON.JSON.Parameters.EnableAnonymousTypes = true;
             fastJSON.JSON.Parameters.UseEscapedUnicode = false;
 
-            if (Debugger.IsAttached == false) {
-                if (mutex.WaitOne(TimeSpan.Zero, true))
-                    mutex.ReleaseMutex();
-                else
-                {
-                    var cp = Process.GetCurrentProcess();
-                    var p = Process.GetProcessesByName(cp.ProcessName);
-                    for (int i = 0; i < p.Length; i++)
-                    {
-                        if (p[i] != cp & p[i].MainModule.FileName == cp.MainModule.FileName)
-                        {
-                            ShowWindow(p[i].MainWindowHandle, SW_SHOW);
-                            SetForegroundWindow(p[i].MainWindowHandle);
-                            break;
-                        }
-                    }
-                    Environment.Exit(0);
-                }
+            bool found = false;
+            var cp = Process.GetCurrentProcess();
+            var p = Process.GetProcessesByName(cp.ProcessName);
+            for (int i = 0; i < p.Length; i++) {
+                if (p[i].MainModule.ModuleName == cp.MainModule.ModuleName & p[i].Id != cp.Id) {
 
+                    if (Debugger.IsAttached == true) {
+                        // Another instance is running and may case confusion. Close it first.
+                        Debugger.Break();
+                    }
+
+                    StringMessage.SendString(p[i].MainWindowHandle.ToInt32(), "Restore");
+
+                    // This is needed in case the app is minimized to tray:
+                    foreach (IntPtr hwnd in EnumerateProcessWindowHandles(p[i].Id)) {
+                        StringMessage.SendString(hwnd.ToInt32(), "Restore");
+                    }
+
+                    SetForegroundWindow(p[i].MainWindowHandle);
+                    found = true;
+                    break;
+                }
             }
+            if (found) Environment.Exit(0);
+
 
         }
 

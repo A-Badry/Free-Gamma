@@ -16,9 +16,10 @@
             CornerRadius="0"/>
     </WindowChrome.WindowChrome>
 
+    
+    
     <StackPanel Background="WhiteSmoke" x:Name="pnl_0" >
         <local:ctrl_TitleBar x:Name="TitleBar"/>
-
 
         <StackPanel x:Name="pnl_1"  >
 
@@ -49,7 +50,7 @@
 
                         <StackPanel >
                             <DockPanel LastChildFill="True">
-                                <ComboBox x:Name="cmbo_Mode" Width="180" Height="23" VerticalContentAlignment="Center" HorizontalAlignment="Left" FocusVisualStyle="{x:Null}" Padding="6,0,5,0"/>
+                                <ComboBox x:Name="cmbo_Mode" Width="184" Height="23" VerticalContentAlignment="Center" HorizontalAlignment="Left" FocusVisualStyle="{x:Null}" Padding="6,0,5,0"/>
                                 <Rectangle Width="6" HorizontalAlignment="Left"/>
                                 <ComboBox x:Name="cmbo_Channel" Height="23" VerticalContentAlignment="Center" FocusVisualStyle="{x:Null}" Padding="6,0,5,0"/>
                             </DockPanel>
@@ -97,8 +98,44 @@
         </StackPanel>
 
 
+
+
+        
     </StackPanel>
 
-  
 
+
+
+    <Window.Resources>
+
+        <ContextMenu x:Key="mnu_Profiles" FontSize="13">
+            <MenuItem Header="Rename" Click="mnu_Profiles_Rename_Click"/>
+            <MenuItem Header="Duplicate" Click="mnu_Profiles_Duplicate_Click"/>
+            <MenuItem Header="New Profile" Click="mnu_Profiles_NewProfile_Click"/>
+            <Separator Margin="-24,1,1,1"/>
+            <MenuItem Header="Refresh" Click="mnu_Profiles_Refresh_Click"/>
+            <MenuItem Header="Tests">
+                <MenuItem Header="View calibration image" Click="mnu_Tests_CalibImage_Click"/>
+                <MenuItem Header="Black level" Click="mnu_Tests_BlackLevel_Click"/>
+            </MenuItem>
+            <MenuItem Header="Delete" Click="mnu_Profiles_Delete_Click"/>
+            <Separator Margin="-24,1,1,1"/>
+            <MenuItem Header="Settings" Click="mnu_Profiles_Settings_Click"/>
+            <Separator Margin="-24,1,1,1"/>
+            <MenuItem Header="About" Click="mnu_Profiles_About_Click"/>
+        </ContextMenu>
+
+        <ContextMenu x:Key="mnu_Graph">
+            <MenuItem Header="Copy from mixed-mode" Click="mnu_Graph_CopyFromGray_Click"/>
+            <MenuItem Header="Copy from ..">
+                <MenuItem Header="Red" Click="mnu_Graph_CopyFromRed_Click"/>
+                <MenuItem Header="Green" Click="mnu_Graph_CopyFromGreen_Click"/>
+                <MenuItem Header="Blue" Click="mnu_Graph_CopyFromBlue_Click"/>
+            </MenuItem>
+        </ContextMenu>
+        
+        
+        
+    </Window.Resources>
+    
 </Window>

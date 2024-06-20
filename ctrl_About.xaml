@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Free_Gamma"
              mc:Ignorable="d" 
-             MinHeight="200" Width="340" Margin="10" Background="White" Visibility="Visible">
+             MinHeight="200" Width="340" Margin="10" Background="White" Visibility="Visible" UseLayoutRounding="True">
     <UserControl.Effect>
         <DropShadowEffect ShadowDepth="1" BlurRadius="7"/>
     </UserControl.Effect>
