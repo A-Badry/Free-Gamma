@@ -36,7 +36,7 @@
             <Image Source="Resources/tray.png" Margin="7" RenderOptions.BitmapScalingMode="Fant"/>
         </Grid>
 
-        <Image x:Name="img_Icon"  Width="16" Height="16" Margin="10 1 5 0" RenderOptions.BitmapScalingMode="Fant"/>
+        <Image x:Name="img_Icon"  Width="16" Height="16" Margin="10 1 5 0" RenderOptions.BitmapScalingMode="Fant" MouseLeftButtonUp="img_Icon_MouseLeftButtonUp" shell:WindowChrome.IsHitTestVisibleInChrome="True"/>
         <TextBlock x:Name="txt_AppTitle" Text="App Title" DockPanel.Dock="Left" Margin="5 1 5 0" VerticalAlignment="Center" FontSize="13" />
     </DockPanel>
 

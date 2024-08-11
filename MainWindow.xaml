@@ -108,7 +108,7 @@
 
     <Window.Resources>
 
-        <ContextMenu x:Key="mnu_Profiles" FontSize="13">
+        <ContextMenu x:Key="mnu_Profiles" FontSize="14">
             <MenuItem Header="Rename" Click="mnu_Profiles_Rename_Click"/>
             <MenuItem Header="Duplicate" Click="mnu_Profiles_Duplicate_Click"/>
             <MenuItem Header="New Profile" Click="mnu_Profiles_NewProfile_Click"/>

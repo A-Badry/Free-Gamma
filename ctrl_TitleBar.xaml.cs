@@ -1,16 +1,20 @@
 ﻿using fastJSON;
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Free_Gamma
 {
@@ -79,19 +83,19 @@ namespace Free_Gamma
 
 
 
-        private void ParentWindow_Activated(object sender,  EventArgs e)
+        private void ParentWindow_Activated(object sender, EventArgs e)
         {
             pnl_Close.Opacity = 1;
             pnl_Max.Opacity = 1;
             pnl_Min.Opacity = 1;
             pnl_Tray.Opacity = 1;
-            txt_AppTitle .Opacity = 1;  
-            mod_General .DoEvents();
+            txt_AppTitle.Opacity = 1;
+            mod_General.DoEvents();
             // When activating the main window by a continuous left click, the above code may
             // experience a 1 second delay, thats why the DoEvents().
         }
 
-        private void ParentWindow_Deactivated(object sender,  EventArgs e)
+        private void ParentWindow_Deactivated(object sender, EventArgs e)
         {
             pnl_Close.Opacity = 0.6;
             pnl_Max.Opacity = 0.6;
@@ -207,8 +211,8 @@ namespace Free_Gamma
         private void pnl_Command_MouseLeave(object sender, MouseEventArgs e)
         {
             ((Grid)sender).Background = Brushes.Transparent;
-        var tooltip =    (ToolTip )  ((Grid)sender).ToolTip ;
-            if (tooltip != null) { tooltip .IsOpen = false; };
+            var tooltip = (ToolTip)((Grid)sender).ToolTip;
+            if (tooltip != null) { tooltip.IsOpen = false; };
         }
 
 
@@ -258,6 +262,34 @@ namespace Free_Gamma
         }
 
 
+
+
+
+
+        DispatcherTimer LMouseUpTimer = new DispatcherTimer() ;
+        bool LMouseUpTimer_Subscribed = false;
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]  public static extern int GetDoubleClickTime();
+
+        private void img_Icon_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!LMouseUpTimer_Subscribed) {
+                LMouseUpTimer.Interval  = new TimeSpan(0, 0, 0, 0, GetDoubleClickTime());
+                LMouseUpTimer.Tick += LMouseUpTimer_Tick; LMouseUpTimer_Subscribed = true; 
+            }
+          
+            if (LMouseUpTimer.IsEnabled) {
+                LMouseUpTimer.Stop();
+                Application.Current.Shutdown();
+            }
+            else {
+                LMouseUpTimer.Start();
+            }
+        }
+
+        void LMouseUpTimer_Tick(object s, EventArgs e)
+        {
+            LMouseUpTimer.Stop();  
+        }
 
 
 

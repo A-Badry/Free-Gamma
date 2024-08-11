@@ -23,9 +23,6 @@ namespace Free_Gamma
         private bool TestMode;
         private TaskbarIcon NotifyIcon = new TaskbarIcon();
 
-        private HwndSource hwndSource;
-        public const int WM_COPYDATA = 0x4A;
-
         private ContextMenu mnu_Profiles;
         private ContextMenu mnu_Graph = new ContextMenu();
 
@@ -143,14 +140,6 @@ namespace Free_Gamma
         }
 
        
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-
-            hwndSource = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
-            hwndSource.AddHook(HwndHook);
-        }
 
 
 
@@ -349,7 +338,6 @@ namespace Free_Gamma
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             SaveSettings();
-            hwndSource.RemoveHook(HwndHook);
         }
 
 
@@ -1075,19 +1063,6 @@ namespace Free_Gamma
 
 
 
-
-
-        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            if (msg == WM_COPYDATA) {
-                if (StringMessage.ReceiveString(lParam) == "Restore") {
-                    RestoreFromSystemTray();
-                    this.WindowState = WindowState.Normal;
-                    this.Focus();
-                }
-            }
-            return IntPtr.Zero;
-        }
 
 
 

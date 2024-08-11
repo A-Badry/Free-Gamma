@@ -70,7 +70,7 @@
       <DependentUpon>form_Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="mod_General.cs" />
-    <Compile Include="StringMessage.cs" />
+    <Compile Include="SingleInstanceWPFApp.cs" />
     <Page Include="ctrl_About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
