@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Free_Gamma"
         mc:Ignorable="d"
-        Title="Free Gamma" FontSize="14"   ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display"
-        Width="502" Height="421"  >
+        Title="Free Gamma" FontSize="14"   ResizeMode="CanMinimize"  WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Ideal"
+        Width="502" Height="421" FontFamily="Segoe UI Variable Text"  >
     
     <WindowChrome.WindowChrome>
         <WindowChrome 
@@ -108,7 +108,7 @@
 
     <Window.Resources>
 
-        <ContextMenu x:Key="mnu_Profiles" FontSize="14">
+        <ContextMenu x:Key="mnu_Profiles" FontSize="14" FontFamily="Segoe UI Variable Text">
             <MenuItem Header="Rename" Click="mnu_Profiles_Rename_Click"/>
             <MenuItem Header="Duplicate" Click="mnu_Profiles_Duplicate_Click"/>
             <MenuItem Header="New Profile" Click="mnu_Profiles_NewProfile_Click"/>
@@ -125,7 +125,7 @@
             <MenuItem Header="About" Click="mnu_Profiles_About_Click"/>
         </ContextMenu>
 
-        <ContextMenu x:Key="mnu_Graph">
+        <ContextMenu x:Key="mnu_Graph" FontSize="14" FontFamily="Segoe UI Variable Text">
             <MenuItem Header="Copy from mixed-mode" Click="mnu_Graph_CopyFromGray_Click"/>
             <MenuItem Header="Copy from ..">
                 <MenuItem Header="Red" Click="mnu_Graph_CopyFromRed_Click"/>

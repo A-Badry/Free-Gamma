@@ -42,7 +42,8 @@
     <Reference Include="fastJSON">
       <HintPath>References\fastJSON.dll</HintPath>
     </Reference>
-    <Reference Include="Hardcodet.NotifyIcon.Wpf">
+    <Reference Include="Hardcodet.NotifyIcon.Wpf, Version=1.1.0.0, Culture=neutral, PublicKeyToken=682384a853a08aad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Hardcodet.NotifyIcon.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
